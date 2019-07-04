@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CUSTOMER REGISTRATION </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: skyblue">
+<div class="jumbotron text-center " style="background-color: violet">
+	<h1>Customer Registeration</h1>
+</div>
+<form>
+<div class="container">
+	<div class="row" style="background-color: lightgrey ">
+		<div class="col-xs-4" style="padding: 10px">
+		
+			<label>NAME: </label><input type="text" id="name" placeholder="Enter the name" style="background-color: lightblue"></div>
+		<div class="col-xs-4" style="padding: 10px">	<label>MOBILE NUMBER:</label><input type="number" id="number" placeholder="Enter the mobile number" style="background-color: lightblue"></div>
+		<div class="col-xs-4" style="padding: 10px">	<LABEL>E-MAIL:</LABEL><input type="text" id="email" placeholder="Enter the email" style="background-color: lightblue">
+		<!--<button id='submit' onclick="addToDo()">Submit</button>-->
+		<input type="submit" class="btn btn-default"  value="submit" onclick="addToDo()">
+        <div class="circle">
+        <div class="glyphicon glyphicon-submit"></div>
+       </div></div> 	
+		
+	</div>
+</div>
+</div>
+</form>
+<div style="background-color: violet;">
+<h1 class="text-center"> Registered </h1></div>
+<div class="row text-center">
+<div id="result"></div>
+</div>
+<script type="text/javascript">
+	var customer = [];
+	//var index = 0;
+	function customerfn(name,number,email)
+	{
+		
+		this.name=name;
+		this.number=number;
+		this.email=email;
+
+	}
+
+	function addToDo()
+	{
+		var name= document.getElementById("name").value;
+		var number= document.getElementById("number").value;
+		var email= document.getElementById("email").value;
+		var cust= new customerfn(name,number,email);
+		var count = customer.push(cust);
+		
+		console.log('count ',count);
+		console.log(cust);
+		var submit = document.getElementById('submit');
+		displayToDo(cust,count);
+	}
+	
+
+	function displayToDo(cust,count){
+		var result = '';
+		var outerdiv = document.getElementById("result");
+	
+		var tododiv = document.createElement("div");
+		var todospan1 = document.createElement("input");
+		var todospan2 = document.createElement("input");
+		var todospan3 = document.createElement("input");
+		var todoedit = document.createElement("button");
+		var tododelete = document.createElement("button");
+		var brk = document.createElement("br")
+		tododiv.setAttribute("id",count);
+		todoedit.setAttribute("id",count);
+		tododelete.setAttribute("id",count);
+		todospan1.type = "text";
+		todospan1.value = cust.name;
+		todospan2.type = "number";
+		todospan2.value = cust.number;//number is the id name
+		todospan3.type = "text";
+		todospan3.value = cust.email;
+		todoedit.innerText ="Edit";
+		tododelete.innerText ="Delete";
+		tododiv.appendChild(todospan1);
+		tododiv.appendChild(todospan2);
+		tododiv.appendChild(todospan3);
+		tododiv.appendChild(todoedit);
+		tododiv.appendChild(tododelete);
+		tododiv.appendChild(brk);
+		outerdiv.append(tododiv);
+		todoedit.addEventListener("click",editToDo);
+		tododelete.addEventListener("click",deleteToDo);	
+		
+	}
+
+	function editToDo(){
+		console.log('edit clicked');
+		var editedValue='';
+		console.log(this.parentNode.firstChild.innerHTML);
+		count =event.srcElement.id;
+		//editedValue = todoedit1;todoedit2;todoedit3;
+       
+       var par= this.parentNode;
+       console.log('parent',par);
+       var editedName =par.childNodes[0].value;
+       var editedMobile= par.childNodes[1].value;
+       var editedEmail= par.childNodes[2].value;
+	  
+		console.log('name ',editedName, ' mobile ',editedMobile,'email',editedEmail);
+		var editedCustomer =new customerfn(editedName,editedMobile,editedEmail);
+		customerfn[count] = editedCustomer;
+		console.log('after edited :',editedCustomer);
+	}
+
+	function deleteToDo()
+	{
+		console.log('count to be removed '+count);
+		customer.splice(count);
+		console.log('after removal ' +customer);
+	}
+	
+	function deleteToDo(){
+		console.log('delete clicked');
+		console.log(event.srcElement.id);
+		console.log(this.parentNode);
+		count = event.srcElement.id;
+		var pare = this.parentNode;
+		pare.remove();
+		customer.splice(count,1);
+		console.log('after deletion :',customer);
+	}
+</script>
+</body>
+</html>
