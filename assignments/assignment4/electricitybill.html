@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>electricitybill</title>
+</head>
+<body>
+<h2>electric bill</h2>
+<script type="text/javascript">
+	function readingdetails(units)
+	{
+		if(units<=100)
+		{
+			res=units*2;
+			console.log("amount of eb bill " +res);
+		}
+		else if(units >100 && units<=200 )
+		{
+			unit1=units-100;
+			res=unit1*3+100*2;
+			console.log("amount of eb bill "+res);
+		} 
+		else(units>200)
+		{
+			
+			res=(units-200)*4+100*2+200*3;
+			console.log("amount of eb bill "+res);
+		}
+		}
+result=readingdetails(1000);
+</script>
+</body>
+</html>
